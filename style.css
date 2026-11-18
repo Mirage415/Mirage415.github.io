@@ -48,3 +48,15 @@ header {
   .atlas { grid-template-columns: 1fr; gap: 6px; padding: 16px; }
   .atlas canvas { max-width: 300px; margin: auto; }
 }
+
+.paper .venue {
+  display: table;
+  background: #e5eee9;
+  color: #204b3d;
+  border-left: 3px solid #54816c;
+  padding: 3px 9px;
+  margin: 6px 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+#physical-time .venue { background: #f5ead9; border-color: #aa7535; color: #694718; }
