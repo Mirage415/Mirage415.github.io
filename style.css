@@ -6,3 +6,45 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 .teaching{padding-top:20px}.course{display:grid;grid-template-columns:200px 1fr 40px;align-items:center;gap:25px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0}.course>span{font-size:10px;color:var(--muted);letter-spacing:1px}.course small{font-size:11px;color:var(--muted)}.course h3{font-size:28px;letter-spacing:-1px;margin:4px 0 0}.course .course-symbol{font-size:32px;color:#6b8550}@media(max-width:650px){.course{grid-template-columns:1fr 30px;gap:15px}.course>span:first-child{grid-column:1/-1}.course h3{font-size:25px}}
 :root{--paper:#faf8f3;--ink:#182c36;--dark:#142b35;--muted:#536873;--line:#d7dcdb;--lime:#efbd80}header{position:relative;background:var(--paper);color:var(--ink);border-color:var(--line);padding:0 max(5%,calc((100vw - 1080px)/2));height:74px}.brand .monogram{color:#92512e}nav{color:var(--muted)}nav a:hover,.contact-nav:hover{color:#944721}.profile,.section{max-width:1080px;margin:auto;padding:48px 0}.profile{display:grid;grid-template-columns:1.12fr 1fr;align-items:center;gap:60px;padding:68px 0;border-bottom:1px solid var(--line)}.profile h1,.section h2,.publications-heading h3{font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em}.profile h1{font-size:clamp(54px,6vw,88px);margin:0 0 18px}.kicker{color:#90502f;font-size:13px;letter-spacing:.06em;margin:0 0 12px}.profile .lead{font:23px/1.4 Georgia,serif;color:var(--ink)}.profile p{color:var(--muted)}.profile figure{margin:0;border:1px solid var(--line);background:white;padding:16px}.profile img{display:block;width:100%}.profile figcaption{border-top:1px solid var(--line);padding:12px 0 0;font-size:12px}.socials a,.paper-links a,.paper-links button{color:#824421}.publications-heading{margin:0 0 22px}.publications-heading h3,.section h2{font-size:38px}.news{background:transparent}.section-heading{margin-bottom:24px}.paper-year,.authors,.venue,.paper-links a,.paper-links button,.paper summary{font-size:12px}.paper h3{font:24px/1.26 Georgia,serif}.hobbies article{background:#e6eae7}.atlas{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px;background:#122e38;color:#fff;padding:30px;margin-bottom:42px}.atlas canvas{width:100%;height:auto}.atlas summary,.atlas label{font-size:13px}.atlas label{display:flex;align-items:center;gap:12px}.atlas input{accent-color:#e9b477}.atlas details{margin-top:16px}.atlas p{color:#d1dfdf}.atlas #regions{color:#f4cd91}.news-list p,.authors{line-height:1.6}@media(max-width:1170px){.profile,.section{margin-left:6%;margin-right:6%}}@media(max-width:680px){header{height:auto;padding:14px 6%}.profile{grid-template-columns:1fr;gap:26px;padding:38px 0}.profile figure{max-width:480px}.atlas{grid-template-columns:1fr;padding:20px}.section{padding-top:34px;padding-bottom:34px}.publications-heading{margin-top:0}}
+
+/* A shared reading column keeps the profile, publications, and notes aligned. */
+.profile, .section, .personal-notes {
+  width: min(92%, 940px);
+  margin-inline: auto;
+}
+header {
+  padding-inline: max(4%, calc((100vw - 940px) / 2));
+  height: 64px;
+}
+.profile { display: block; padding-block: 32px 26px; }
+.profile h1 { font-size: clamp(44px, 5vw, 62px); margin-bottom: 10px; }
+.profile .kicker { margin-bottom: 5px; }
+.profile p:not(.kicker) { max-width: 72ch; margin-bottom: 0; }
+.profile .socials { margin-top: 12px; gap: 22px; }
+.section { padding-block: 24px; }
+.publications-heading, .section-heading { margin: 0 0 12px; }
+.publications-heading h3, .section h2 { font-size: 30px; }
+.paper { padding: 16px 0; grid-template-columns: 86px 1fr 22px; gap: 12px; }
+.paper h3 { font-size: 21px; margin-bottom: 4px; }
+.paper .authors, .paper .venue { margin-bottom: 5px; }
+.paper details { margin-top: 6px; }
+.news-list article { padding: 12px 0; grid-template-columns: 86px 1fr 22px; gap: 12px; }
+.personal-notes { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; border-top: 1px solid var(--line); }
+.personal-notes .section { width: 100%; margin: 0; }
+.course { display: block; padding: 0; border: 0; }
+.course h3 { font: 18px Georgia, serif; }
+.hobbies { display: flex; gap: 16px; }
+.hobbies article { padding: 0; background: none; }
+.hobbies h3 { font: 18px Georgia, serif; margin: 0; }
+.atlas { grid-template-columns: minmax(200px, 34%) 1fr; padding: 18px 28px; margin-block: 4px 25px; }
+.atlas p { margin-bottom: 8px; }
+@media(max-width:680px) {
+  header { height: auto; }
+  .profile, .section, .personal-notes { width: 90%; }
+  .paper { grid-template-columns: 1fr 18px; gap: 1px 6px; }
+  .news-list article { grid-template-columns: 1fr 14px; gap: 4px; }
+  .personal-notes { grid-template-columns: 1fr; gap: 0; }
+  .personal-notes .section { padding-block: 16px; }
+  .atlas { grid-template-columns: 1fr; gap: 6px; padding: 16px; }
+  .atlas canvas { max-width: 300px; margin: auto; }
+}

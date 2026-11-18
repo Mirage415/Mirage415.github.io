@@ -13,4 +13,3 @@ document.querySelectorAll('.cite').forEach(b=>b.addEventListener('click',()=>{co
 document.querySelector('#close-citation').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 document.querySelector('#copy-citation').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.querySelector('#citation-text').textContent);document.querySelector('#copy-status').textContent='Citation copied.'}catch{document.querySelector('#copy-status').textContent='Select the citation above to copy it.'}});
 document.querySelector('#year').textContent=new Date().getFullYear();
-document.querySelector('.wave').innerHTML=Array.from({length:37},(_,i)=>`<i style="height:${12+Math.abs(Math.sin(i*.73)*Math.cos(i*.17))*65}px"></i>`).join('');
