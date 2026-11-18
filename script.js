@@ -14,20 +14,3 @@ document.querySelector('#close-citation').addEventListener('click',()=>dialog.cl
 document.querySelector('#copy-citation').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.querySelector('#citation-text').textContent);document.querySelector('#copy-status').textContent='Citation copied.'}catch{document.querySelector('#copy-status').textContent='Select the citation above to copy it.'}});
 document.querySelector('#year').textContent=new Date().getFullYear();
 document.querySelector('.wave').innerHTML=Array.from({length:37},(_,i)=>`<i style="height:${12+Math.abs(Math.sin(i*.73)*Math.cos(i*.17))*65}px"></i>`).join('');
-// A conceptual phase-space illustration, not an experimental robot trajectory.
-const canvas=document.querySelector('#trajectory'),ctx=canvas.getContext('2d'),motion=document.querySelector('#motion');
-const preference=matchMedia('(prefers-reduced-motion: reduce)');let paused=preference.matches,visible=true,frame=0,t=0,pointer={x:0,y:0},w=0,h=0;
-function syncButton(){motion.textContent=paused?'Play motion ▷':'Pause motion Ⅱ';motion.setAttribute('aria-pressed',String(paused));}
-function resize(){const r=canvas.getBoundingClientRect();w=r.width;h=r.height;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);draw();}
-function project(x,y,z){const ay=.45+pointer.x*.3+t*.05,ax=.55+pointer.y*.22;const xx=x*Math.cos(ay)-z*Math.sin(ay),zz=x*Math.sin(ay)+z*Math.cos(ay);const yy=y*Math.cos(ax)-zz*Math.sin(ax),depth=y*Math.sin(ax)+zz*Math.cos(ax);return [w*.51+xx*Math.min(w,h)*.30,h*.50+yy*Math.min(w,h)*.30,depth];}
-function draw(){ctx.clearRect(0,0,w,h);if(!w||!h)return;const glow=ctx.createRadialGradient(w*.53,h*.5,0,w*.53,h*.5,w*.49);glow.addColorStop(0,'#9cc85a0c');glow.addColorStop(1,'#9cc85a00');ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
-ctx.strokeStyle='#71905a17';ctx.lineWidth=.6;for(let k=-4;k<=4;k++){ctx.beginPath();const a=project(k*.38,.95,-1.6),b=project(k*.38,.95,1.6);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();ctx.beginPath();const c=project(-1.6,.95,k*.38),d=project(1.6,.95,k*.38);ctx.moveTo(c[0],c[1]);ctx.lineTo(d[0],d[1]);ctx.stroke();}
-for(let j=0;j<28;j++){ctx.beginPath();for(let i=0;i<=230;i++){const a=i/230*Math.PI*2,b=j/28*Math.PI*2;const radius=.91+.31*Math.cos(b+3*a);const x=radius*Math.cos(a),z=radius*Math.sin(a),y=.52*Math.sin(b+3*a);const p=project(x,y,z);if(i===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);}ctx.strokeStyle=`rgba(185,232,118,${.12+(Math.sin(j*.5+t)+1)*.12})`;ctx.lineWidth=.7;ctx.stroke();}
-for(let j=0;j<7;j++){const a=t*.19+j*.86,b=j*1.6,r=.91+.31*Math.cos(b+3*a);const p=project(r*Math.cos(a),.52*Math.sin(b+3*a),r*Math.sin(a));ctx.fillStyle='#d3ff8e';ctx.shadowColor='#c3f56a';ctx.shadowBlur=10;ctx.beginPath();ctx.arc(p[0],p[1],2.2,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;}
-ctx.fillStyle='#69835b';ctx.font='9px monospace';ctx.fillText('h(t)',w*.12,h*.3);ctx.fillText('a(t+Δt)',w*.73,h*.76);}
-function animate(){frame=0;if(paused||!visible||document.hidden)return;t+=.016;draw();frame=requestAnimationFrame(animate);}
-function start(){if(!frame&&!paused&&visible&&!document.hidden)frame=requestAnimationFrame(animate);}
-motion.addEventListener('click',()=>{paused=!paused;syncButton();if(paused){cancelAnimationFrame(frame);frame=0}else start();});
-canvas.addEventListener('pointermove',e=>{if(paused||preference.matches)return;const r=canvas.getBoundingClientRect();pointer.x=(e.clientX-r.left)/w-.5;pointer.y=(e.clientY-r.top)/h-.5;});
-preference.addEventListener('change',e=>{paused=e.matches;syncButton();if(paused){cancelAnimationFrame(frame);frame=0;draw()}else start();});
-new ResizeObserver(resize).observe(canvas);new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)start();else{cancelAnimationFrame(frame);frame=0;}}).observe(canvas);document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0}else start();});syncButton();resize();start();
