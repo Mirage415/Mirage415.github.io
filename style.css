@@ -60,3 +60,14 @@ header {
   font-weight: 700;
 }
 #physical-time .venue { background: #f5ead9; border-color: #aa7535; color: #694718; }
+
+.notes-links, .note-page { width: min(92%, 940px); margin-inline: auto; }
+.notes-links { display: grid; grid-template-columns: repeat(2, 1fr); border-block: 1px solid var(--line); margin-bottom: 24px; gap: 24px; }
+.notes-links a { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; color: var(--ink); font: 24px Georgia, serif; }
+.notes-links a:hover, .note-page a:hover { color: #824421; text-decoration: underline; }
+.notes-links span { font: 18px sans-serif; }
+.note-page { padding-block: 48px; }
+.note-page h1 { font: clamp(40px, 6vw, 64px)/1.2 Georgia, serif; letter-spacing: -.04em; margin: 32px 0 20px; }
+.note-page h2 { font: 26px Georgia, serif; letter-spacing: -.02em; }
+.note-page a { color: #824421; }
+@media(max-width: 600px) { .notes-links { width: 90%; grid-template-columns: 1fr; gap: 0; } }
